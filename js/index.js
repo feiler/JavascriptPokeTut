@@ -3,8 +3,18 @@ const c = canvas.getContext('2d')
 canvas.width = 1024
 canvas.height = 576
 
-c.fillStyle = 'white'
-c.fillRect(0,0, canvas.width, canvas.height)
+const arrayCollision = []
+for (let i = 0; i < collision.length; i += 70){    
+    arrayCollision.push(collision.slice(i, 70 + i))
+}
+
+class Boundary {
+    constructor({position}) {
+        
+    }
+}
+/* c.fillStyle = 'white'
+c.fillRect(0,0, canvas.width, canvas.height) */
 
 const image = new Image()
 image.src = './img/Pellet Town.png'
@@ -78,26 +88,32 @@ function animate() {
         playerImage.height
     )
     
-    if (keys.w.pressed) {
-        background.position.y = background.position.y + 3
-    }
+    if (keys.w.pressed && lastkey === 'w') background.position.y += 3
+    else if (keys.a.pressed && lastkey === 'a') background.position.x += 3
+    else if (keys.s.pressed && lastkey === 's') background.position.y -= 3
+    else if (keys.d.pressed && lastkey === 'd') background.position.x -= 3
+    
     
 }
 animate()
-
+let lastkey = ''
 window.addEventListener('keydown', (e) => {
    switch (e.key){
     case 'w':
         keys.w.pressed = true
+        lastkey = 'w'
         break
     case 'a':
         keys.a.pressed = true
+        lastkey = 'a'
         break
     case 's':
         keys.s.pressed = true
+        lastkey = 's'
         break
     case 'd':
         keys.d.pressed = true
+        lastkey = 'd'
         break
    }  
    console.log(keys)
